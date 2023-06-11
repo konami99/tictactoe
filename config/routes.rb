@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
   get '/tictactoeboards/click', to: 'tictactoeboards#click'
-  root "tictactoeboards#index"
+  get '/tictactoeboards/index', to: 'tictactoeboards#index'
+  root "tictactoeboards#initialise_board"
 
 end
