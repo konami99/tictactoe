@@ -31,19 +31,20 @@
 	</style>
 </head>
 <body>
-	<%= turbo_stream_from "tictactoe" %>
-	<div class="board" data-controller="tictactoe">
-		<div class="cell" data-action="click->tictactoe#click"></div>
-		<div class="cell" data-action="click->tictactoe#click"></div>
-		<div class="cell" data-action="click->tictactoe#click"></div>
-		<div class="cell" data-action="click->tictactoe#click"></div>
-		<div class="cell" data-action="click->tictactoe#click"></div>
-		<div class="cell" data-action="click->tictactoe#click"></div>
-		<div class="cell" data-action="click->tictactoe#click"></div>
-		<div class="cell" data-action="click->tictactoe#click"></div>
-		<div class="cell" data-action="click->tictactoe#click"></div>
-	</div>
-
+	<%= turbo_stream_from "tictoctoeboards" %>
+	<%= turbo_frame_tag @tictactoeboard do %>
+		<div class="board" data-controller="tictactoe">
+			<div class="cell <% if @tictactoeboard.cell_1 == 'circle' %>circle<% elsif @tictactoeboard.cell_1 == 'cross' %>cross<% end %>" data-action="click->tictactoe#click"></div>
+			<div class="cell" data-action="click->tictactoe#click"></div>
+			<div class="cell" data-action="click->tictactoe#click"></div>
+			<div class="cell" data-action="click->tictactoe#click"></div>
+			<div class="cell" data-action="click->tictactoe#click"></div>
+			<div class="cell" data-action="click->tictactoe#click"></div>
+			<div class="cell" data-action="click->tictactoe#click"></div>
+			<div class="cell" data-action="click->tictactoe#click"></div>
+			<div class="cell" data-action="click->tictactoe#click"></div>
+		</div>
+	<% end %>
 	<script>
 		// Get all the cells
 		const cells = document.querySelectorAll('.cell');

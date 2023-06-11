@@ -1,0 +1,14 @@
+<%= turbo_frame_tag tictactoeboard do %>
+  
+  <div class="board" data-controller="tictactoe">
+    <div class="cell <% if tictactoeboard.cell_1 == 'circle' %>circle<% elsif tictactoeboard.cell_1 == 'cross' %>cross<% end %>" data-action="click->tictactoe#click"></div>
+    <div class="cell" data-action="click->tictactoes#click"></div>
+    <div class="cell" data-action="click->tictactoes#click"></div>
+    <div class="cell" data-action="click->tictactoes#click"></div>
+    <div class="cell" data-action="click->tictactoes#click"></div>
+    <div class="cell" data-action="click->tictactoes#click"></div>
+    <div class="cell" data-action="click->tictactoes#click"></div>
+    <div class="cell" data-action="click->tictactoes#click"></div>
+    <div class="cell" data-action="click->tictactoes#click"></div>
+  </div>
+<% end %>
