@@ -32,16 +32,16 @@
 </head>
 <body>
 	<%= turbo_stream_from "tictactoe" %>
-	<div class="board">
-		<div class="cell"></div>
-		<div class="cell"></div>
-		<div class="cell"></div>
-		<div class="cell"></div>
-		<div class="cell"></div>
-		<div class="cell"></div>
-		<div class="cell"></div>
-		<div class="cell"></div>
-		<div class="cell"></div>
+	<div class="board" data-controller="tictactoe">
+		<div class="cell" data-action="click->tictactoe#click"></div>
+		<div class="cell" data-action="click->tictactoe#click"></div>
+		<div class="cell" data-action="click->tictactoe#click"></div>
+		<div class="cell" data-action="click->tictactoe#click"></div>
+		<div class="cell" data-action="click->tictactoe#click"></div>
+		<div class="cell" data-action="click->tictactoe#click"></div>
+		<div class="cell" data-action="click->tictactoe#click"></div>
+		<div class="cell" data-action="click->tictactoe#click"></div>
+		<div class="cell" data-action="click->tictactoe#click"></div>
 	</div>
 
 	<script>
@@ -69,7 +69,7 @@
 
 		// Add click event listener to each cell
 		cells.forEach(cell => {
-			cell.addEventListener('click', handleCellClick);
+			//cell.addEventListener('click', handleCellClick);
 		});
 	</script>
 </body>
