@@ -21,7 +21,10 @@ class Tictactoeboard < ApplicationRecord
     end
   end
 
-  def whose_turn
+  def whose_turn_next
+    return if winner
 
+    return 'player_1' if circles_count > crosses_count
+    'player_2'
   end
 end

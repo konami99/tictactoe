@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_11_111121) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_12_000547) do
   create_table "tictactoeboards", force: :cascade do |t|
     t.string "channel"
     t.boolean "player_1"
@@ -26,6 +26,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_11_111121) do
     t.string "cell_9"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "circles_count", default: 0
+    t.integer "crosses_count", default: 0
   end
 
 end
