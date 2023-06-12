@@ -20,4 +20,23 @@ export default class extends Controller {
       body: JSON.stringify({ cell: e.target.id }) 
     });
   }
+
+  reset(e) {
+    console.log('reset');
+    const csrfToken = document.querySelector("[name='csrf-token']").content;
+    fetch(`/tictactoeboards/reset`, {
+      method: 'POST',
+      mode: 'cors',
+      cache: 'no-cache',
+      credentials: 'same-origin',
+      headers: {
+        'Content-Type': 'application/json',
+        'X-CSRF-Token': csrfToken,
+      }
+    })
+    .then(data => {
+      console.log('then');
+      location.reload(true);
+    })
+  }
 }

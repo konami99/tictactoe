@@ -8,8 +8,9 @@ class TictactoeboardsController < ApplicationController
   def click
     request_body = JSON.parse(request.body.read)
     cell = request_body['cell']
-    player = cookies['player_1'].present? ? 'player_1' : 'player_2' 
-    @tictactoeboard = Tictactoeboard.find(1)
+    player = cookies['player_1'].present? ? 'player_1' : 'player_2'
+    channel = cookies['channel']
+    @tictactoeboard = Tictactoeboard.find_by(channel: channel)
 
     return if @tictactoeboard.send(cell)
     return if @tictactoeboard.winner
@@ -23,7 +24,24 @@ class TictactoeboardsController < ApplicationController
   end
 
   def reset
-    binding.pry
+    player_1 = cookies['player_1']
+    player_2 = cookies['player_2']
+    channel = cookies['channel']
+
+    tictactoeboard = Tictactoeboard.find_by(channel: channel)
+    tictactoeboard.update(
+      cell_1: nil,
+      cell_2: nil,
+      cell_3: nil,
+      cell_4: nil,
+      cell_5: nil,
+      cell_6: nil,
+      cell_7: nil,
+      cell_8: nil,
+      cell_9: nil,
+      circles_count: 0,
+      crosses_count: 0
+    )
   end
 
   private
