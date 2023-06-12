@@ -31,7 +31,7 @@
 	</style>
 </head>
 <body>
-	<%= turbo_stream_from "tictoctoeboards" %>
+	<%= turbo_stream_from @tictactoeboard.channel %>
 	<%= turbo_frame_tag @tictactoeboard do %>
 		<div class="board" data-controller="tictactoe">
 			<div id="cell_1" class="cell <% if @tictactoeboard.cell_1 == 'circle' %>circle<% elsif @tictactoeboard.cell_1 == 'cross' %>cross<% end %>" data-action="click->tictactoe#click"></div>
@@ -44,6 +44,7 @@
 			<div id="cell_8" class="cell <% if @tictactoeboard.cell_8 == 'circle' %>circle<% elsif @tictactoeboard.cell_8 == 'cross' %>cross<% end %>" data-action="click->tictactoe#click"></div>
 			<div id="cell_9" class="cell <% if @tictactoeboard.cell_9 == 'circle' %>circle<% elsif @tictactoeboard.cell_9 == 'cross' %>cross<% end %>" data-action="click->tictactoe#click"></div>
 		</div>
+		<button type="button" data-controller="tictactoe" data-action="tictactoe#reset">Reset</button>
 	<% end %>
 </body>
 </html>

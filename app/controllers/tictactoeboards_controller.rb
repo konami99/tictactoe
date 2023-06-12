@@ -2,7 +2,7 @@ class TictactoeboardsController < ApplicationController
   before_action :initialise_board, only: :index
 
   def index
-    @tictactoeboard = Tictactoeboard.find(1)
+    #@tictactoeboard = Tictactoeboard.find(1)
   end
 
   def click
@@ -22,22 +22,32 @@ class TictactoeboardsController < ApplicationController
     end
   end
 
+  def reset
+    binding.pry
+  end
+
   private
 
   def initialise_board
     player_1 = cookies['player_1']
     player_2 = cookies['player_2']
+    channel = cookies['channel']
+
+    if channel.blank?
+      channel = SecureRandom.alphanumeric(12)
+      @tictactoeboard = Tictactoeboard.create(channel: channel)
+      cookies['channel'] = channel
+    else
+      @tictactoeboard = Tictactoeboard.find_by(channel: channel)
+    end
 
     if player_1.blank? && player_2.blank?
-      tictactoeboard = Tictactoeboard.find(1)
-      if tictactoeboard.player_1.blank?
+      if @tictactoeboard.player_1.blank?
         cookies['player_1'] = true
-        tictactoeboard.update(player_1: true)
-        # redirect_to action: 'index'
-      elsif tictactoeboard.player_2.blank?
+        @tictactoeboard.update(player_1: true)
+      elsif @tictactoeboard.player_2.blank?
         cookies['player_2'] = true
-        tictactoeboard.update(player_2: true)
-        # redirect_to action: 'index'
+        @tictactoeboard.update(player_2: true)
       end
     end
   end
