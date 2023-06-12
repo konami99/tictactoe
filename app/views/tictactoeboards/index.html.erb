@@ -45,33 +45,5 @@
 			<div id="cell_9" class="cell <% if @tictactoeboard.cell_9 == 'circle' %>circle<% elsif @tictactoeboard.cell_9 == 'cross' %>cross<% end %>" data-action="click->tictactoe#click"></div>
 		</div>
 	<% end %>
-	<script>
-		// Get all the cells
-		const cells = document.querySelectorAll('.cell');
-
-		// Variable to keep track of the current player
-		let currentPlayer = 'circle';
-
-		// Function to handle cell click event
-		function handleCellClick(event) {
-			const cell = event.target;
-
-			// Check if the cell is already marked
-			if (cell.classList.contains('circle') || cell.classList.contains('cross')) {
-				return;
-			}
-
-			// Set the appropriate class based on the current player
-			cell.classList.add(currentPlayer);
-
-			// Toggle the current player
-			currentPlayer = (currentPlayer === 'circle') ? 'cross' : 'circle';
-		}
-
-		// Add click event listener to each cell
-		cells.forEach(cell => {
-			//cell.addEventListener('click', handleCellClick);
-		});
-	</script>
 </body>
 </html>

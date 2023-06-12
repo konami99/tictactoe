@@ -28,7 +28,7 @@ class TictactoeboardsController < ApplicationController
     cell = request_body['cell']
     player = cookies['player_1'].present? ? 'player_1' : 'player_2' 
     @tictactoeboard = Tictactoeboard.find(1)
-    #binding.pry
+
     return if @tictactoeboard.send(cell)
     return if @tictactoeboard.winner
     return unless @tictactoeboard.whose_turn_next == player
