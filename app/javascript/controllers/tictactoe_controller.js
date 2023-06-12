@@ -9,13 +9,15 @@ export default class extends Controller {
     console.log('click');
     const csrfToken = document.querySelector("[name='csrf-token']").content;
     fetch(`/tictactoeboards/click`, {
-      method: 'GET',
+      method: 'POST',
       mode: 'cors',
       cache: 'no-cache',
       credentials: 'same-origin',
       headers: {
         'Content-Type': 'application/json',
+        'X-CSRF-Token': csrfToken,
       },
+      body: JSON.stringify({ cell: e.target.id }) 
     });
   }
 }
