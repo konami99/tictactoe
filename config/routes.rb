@@ -5,6 +5,5 @@ Rails.application.routes.draw do
   # root "articles#index"
   post '/tictactoeboards/click', to: 'tictactoeboards#click'
   get '/tictactoeboards/index', to: 'tictactoeboards#index'
-  root "tictactoeboards#initialise_board"
-
+  root "tictactoeboards#index"
 end
