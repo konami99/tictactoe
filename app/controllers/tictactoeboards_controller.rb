@@ -55,24 +55,17 @@ class TictactoeboardsController < ApplicationController
   def initialise_board
     player_1 = cookies['player_1']
     player_2 = cookies['player_2']
-    channel = cookies['channel']
-
-    if channel.blank?
-      channel = SecureRandom.alphanumeric(12)
-      @tictactoeboard = Tictactoeboard.create(channel: channel)
-      cookies['channel'] = channel
-    else
-      @tictactoeboard = Tictactoeboard.find_by(channel: channel)
-    end
-
-    if player_1.blank? && player_2.blank?
-      if @tictactoeboard.player_1.blank?
-        cookies['player_1'] = true
-        @tictactoeboard.update(player_1: true)
-      elsif @tictactoeboard.player_2.blank?
-        cookies['player_2'] = true
-        @tictactoeboard.update(player_2: true)
-      end
+    @channel = SecureRandom.alphanumeric(12)
+    @tictactoeboard = Tictactoeboard.create(channel: @channel)
+    
+    if @tictactoeboard.player_1.blank?
+      cookies['player_1'] = true
+      cookies['channel'] = @channel
+      @tictactoeboard.update(player_1: true)
+    elsif @tictactoeboard.player_2.blank?
+      cookies['player_2'] = true
+      cookies['channel'] = @channel
+      @tictactoeboard.update(player_2: true)
     end
   end
 end
