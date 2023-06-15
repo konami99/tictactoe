@@ -34,9 +34,7 @@ export default class extends Controller {
         'X-CSRF-Token': csrfToken,
       }
     })
-    .then(data => {
-      console.log('then');
-      location.reload(true);
-    })
+    .then (response => response.text())
+    .then(html => Turbo.renderStreamMessage(html));
   }
 }

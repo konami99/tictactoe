@@ -1,4 +1,6 @@
 class TictactoeboardsController < ApplicationController
+  include Turbo::Streams::ActionHelper
+
   before_action :initialise_board, only: :index
 
   def index
@@ -30,6 +32,8 @@ class TictactoeboardsController < ApplicationController
 
     tictactoeboard = Tictactoeboard.find_by(channel: channel)
     tictactoeboard.update(
+      player_1: nil,
+      player_2: nil,
       cell_1: nil,
       cell_2: nil,
       cell_3: nil,
@@ -42,6 +46,8 @@ class TictactoeboardsController < ApplicationController
       circles_count: 0,
       crosses_count: 0
     )
+
+    ActionCable.server.broadcast(channel, turbo_stream_action_tag(:reload))
   end
 
   private
