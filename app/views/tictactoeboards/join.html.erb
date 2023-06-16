@@ -1,6 +1,8 @@
+
 <%= turbo_frame_tag "join_a_game" do %>
-
-<p>join a game</p>
-<input type="text" name="channel"></input>
-
+  <%= form_tag('/tictactoeboards/join_team', method: :post) do %>
+    <p>join a game</p>
+    <input type="text" name="channel"></input>
+    <input value="Join" type="submit" />
+  <% end %>
 <% end %>

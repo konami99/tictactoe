@@ -51,7 +51,12 @@ class TictactoeboardsController < ApplicationController
   end
 
   def join
-    
+
+  end
+
+  def join_team
+    binding.pry
+    channel = params[:channel]
   end
 
   private
