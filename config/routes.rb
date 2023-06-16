@@ -6,5 +6,6 @@ Rails.application.routes.draw do
   post '/tictactoeboards/click', to: 'tictactoeboards#click'
   post '/tictactoeboards/reset', to: 'tictactoeboards#reset'
   get '/tictactoeboards/index', to: 'tictactoeboards#index'
+  get '/tictactoeboards/join', to: 'tictactoeboards#join'
   root "tictactoeboards#index"
 end

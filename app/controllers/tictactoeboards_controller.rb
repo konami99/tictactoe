@@ -50,6 +50,10 @@ class TictactoeboardsController < ApplicationController
     ActionCable.server.broadcast(channel, turbo_stream_action_tag(:reload))
   end
 
+  def join
+    
+  end
+
   private
 
   def initialise_board
