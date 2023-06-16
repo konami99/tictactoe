@@ -31,8 +31,8 @@
 	</style>
 </head>
 <body>
-	<%= turbo_stream_from @tictactoeboard.channel %>
 	<%= turbo_frame_tag 'join_a_game' do %>
+		<%= turbo_stream_from @tictactoeboard.channel %>
 		<%= turbo_frame_tag @tictactoeboard do %>
 			<div class="board my-0 mx-auto" data-controller="tictactoe">
 				<div id="cell_1" class="cell <% if @tictactoeboard.cell_1 == 'circle' %>circle<% elsif @tictactoeboard.cell_1 == 'cross' %>cross<% end %>" data-action="click->tictactoe#click"></div>

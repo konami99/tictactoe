@@ -26,27 +26,12 @@ class TictactoeboardsController < ApplicationController
   end
 
   def reset
-    player_1 = cookies['player_1']
-    player_2 = cookies['player_2']
+    cookies.delete(:player_1)
+    cookies.delete(:player_2)
     channel = cookies['channel']
+    cookies.delete(:channel)
 
-    tictactoeboard = Tictactoeboard.find_by(channel: channel)
-    tictactoeboard.update(
-      player_1: nil,
-      player_2: nil,
-      cell_1: nil,
-      cell_2: nil,
-      cell_3: nil,
-      cell_4: nil,
-      cell_5: nil,
-      cell_6: nil,
-      cell_7: nil,
-      cell_8: nil,
-      cell_9: nil,
-      circles_count: 0,
-      crosses_count: 0
-    )
-
+    tictactoeboard = Tictactoeboard.destroy_by(channel: channel)
     ActionCable.server.broadcast(channel, turbo_stream_action_tag(:reload))
   end
 
@@ -55,8 +40,11 @@ class TictactoeboardsController < ApplicationController
   end
 
   def join_team
-    binding.pry
-    channel = params[:channel]
+    cookies.delete(:player_1)
+    cookies.delete(:player_2)
+    cookies['channel'] = params[:channel]
+
+    redirect_to action: :index
   end
 
   private
@@ -64,17 +52,22 @@ class TictactoeboardsController < ApplicationController
   def initialise_board
     player_1 = cookies['player_1']
     player_2 = cookies['player_2']
-    @channel = SecureRandom.alphanumeric(12)
-    @tictactoeboard = Tictactoeboard.create(channel: @channel)
+    channel = cookies['channel']
+
+    @channel = channel ? channel : SecureRandom.alphanumeric(12)
     
-    if @tictactoeboard.player_1.blank?
-      cookies['player_1'] = true
-      cookies['channel'] = @channel
-      @tictactoeboard.update(player_1: true)
-    elsif @tictactoeboard.player_2.blank?
-      cookies['player_2'] = true
-      cookies['channel'] = @channel
-      @tictactoeboard.update(player_2: true)
+    @tictactoeboard = Tictactoeboard.find_or_create_by(channel: @channel)
+    
+    if player_1.blank? && player_2.blank?
+      if @tictactoeboard.player_1.blank?
+        cookies['player_1'] = true
+        cookies['channel'] = @channel
+        @tictactoeboard.update(player_1: true)
+      elsif @tictactoeboard.player_2.blank?
+        cookies['player_2'] = true
+        cookies['channel'] = @channel
+        @tictactoeboard.update(player_2: true)
+      end
     end
   end
 end
