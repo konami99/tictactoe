@@ -54,7 +54,7 @@ class TictactoeboardsController < ApplicationController
     player_2 = cookies['player_2']
     channel = cookies['channel']
 
-    @channel = channel ? channel : SecureRandom.alphanumeric(12)
+    @channel = channel ? channel : SecureRandom.alphanumeric(4)
     
     @tictactoeboard = Tictactoeboard.find_or_create_by(channel: @channel)
     

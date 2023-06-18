@@ -46,9 +46,11 @@
 				<div id="cell_9" class="cell <% if @tictactoeboard.cell_9 == 'circle' %>circle<% elsif @tictactoeboard.cell_9 == 'cross' %>cross<% end %>" data-action="click->tictactoe#click"></div>
 			</div>
 		<% end %>
-		<div>This is your channel code: <%= @channel %>, share it with another person so that person can play with you</div>
-		<button type="button" data-controller="tictactoe" data-action="tictactoe#reset">Reset</button>
-		<%= link_to 'Join a game', tictactoeboards_join_path %>
+		<div>Your channel code: <%= @channel %></div>
+		<button data-controller="tictactoe" data-action="tictactoe#reset" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+			Reset
+		</button>
+		<%= link_to "Join a game", tictactoeboards_join_path, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block" %>
 	<% end %>
 </body>
 </html>
