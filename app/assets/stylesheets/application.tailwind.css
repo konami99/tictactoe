@@ -39,3 +39,14 @@
 .cross::after {
   content: "X";
 }
+
+@keyframes flash {
+  0% { border-color: transparent; }
+  50% { border-color: red; }
+  100% { border-color: transparent; }
+}
+
+.flash-border {
+  animation: flash 3s infinite;
+  border: 1px solid;
+}

@@ -1,4 +1,5 @@
 <%= turbo_frame_tag tictactoeboard do %>
+  <div class="flash-border mb-4">Status: <%= tictactoeboard&.whose_turn_next %>'s turn</div>
   <div class="board my-0 mx-auto" data-controller="tictactoe">
     <div id="cell_1" class="cell <% if tictactoeboard.cell_1 == 'circle' %>circle<% elsif tictactoeboard.cell_1 == 'cross' %>cross<% end %>" data-action="click->tictactoe#click"></div>
     <div id="cell_2" class="cell <% if tictactoeboard.cell_2 == 'circle' %>circle<% elsif tictactoeboard.cell_2 == 'cross' %>cross<% end %>" data-action="click->tictactoe#click"></div>
