@@ -44,7 +44,13 @@ class TictactoeboardsController < ApplicationController
     cookies.delete(:player_2)
     cookies['channel'] = params[:channel]
 
-    redirect_to action: :index
+    respond_to do |format|
+      format.html { redirect_to action: :index }
+      format.turbo_stream {
+        ActionCable.server.broadcast(params[:channel], turbo_stream_action_tag(:reload))
+        redirect_to action: :index
+      }
+    end
   end
 
   private

@@ -1,37 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<style>
-		.board {
-			display: grid;
-			grid-template-columns: repeat(3, 1fr);
-			grid-template-rows: repeat(3, 1fr);
-			gap: 10px;
-			width: 300px;
-			height: 300px;
-		}
-
-		.cell {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			font-size: 48px;
-			background-color: #ffffff;
-			border: 1px solid #000000;
-			cursor: pointer;
-		}
-
-		.circle::after {
-			content: "O";
-		}
-
-		.cross::after {
-			content: "X";
-		}
-	</style>
 </head>
 <body>
-	<%= turbo_frame_tag 'join_a_game' do %>
+	<div>
 		<%= turbo_stream_from @tictactoeboard.channel %>
 		<%= turbo_frame_tag @tictactoeboard do %>
 			<div class="board my-0 mx-auto" data-controller="tictactoe">
@@ -51,6 +23,6 @@
 			Reset
 		</button>
 		<%= link_to "Join a game", tictactoeboards_join_path, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block" %>
-	<% end %>
+	</div>
 </body>
 </html>
