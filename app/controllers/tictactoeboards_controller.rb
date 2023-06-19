@@ -47,7 +47,7 @@ class TictactoeboardsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to action: :index }
       format.turbo_stream {
-        ActionCable.server.broadcast(params[:channel], turbo_stream_action_tag(:reload))
+        ActionCable.server.broadcast(params[:channel], turbo_stream_action_tag(:join_team_notice))
         redirect_to action: :index
       }
     end
