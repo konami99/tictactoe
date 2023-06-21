@@ -34,7 +34,7 @@ class TictactoeboardsController < ApplicationController
     cookies.delete(:channel)
 
     tictactoeboard = Tictactoeboard.destroy_by(channel: channel)
-    ActionCable.server.broadcast(channel, turbo_stream_action_tag(:reload))
+    ActionCable.server.broadcast(channel, turbo_stream.reload)
   end
 
   def join
@@ -49,7 +49,7 @@ class TictactoeboardsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to action: :index }
       format.turbo_stream {
-        ActionCable.server.broadcast(params[:channel], turbo_stream_action_tag(:join_team_notice))
+        ActionCable.server.broadcast(params[:channel], turbo_stream.toast('Someone has joined the game!'))
         redirect_to action: :index
       }
     end

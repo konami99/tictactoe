@@ -7,9 +7,10 @@ window.Turbo.StreamActions.reload = function() {
   location.reload(true);
 }
 
-window.Turbo.StreamActions.join_team_notice = function() {
+window.Turbo.StreamActions.toast = function() {
+  const message = this.getAttribute("message")
   Toastify({
-    text: 'Someone has joined the game',
+    text: message,
     duration: 3000,
     destination: "",
     close: true,
