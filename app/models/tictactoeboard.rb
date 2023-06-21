@@ -1,5 +1,5 @@
 class Tictactoeboard < ApplicationRecord
-  after_update_commit -> { broadcast_replace_to channel }
+  #after_update_commit -> { broadcast_replace_to channel }
 
   def winner
     if cell_1.present? && cell_2.present? && cell_3.present? && cell_1 == cell_2 && cell_2 == cell_3

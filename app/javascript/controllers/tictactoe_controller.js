@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
   connect() {
-    console.log(this.element);
+    //console.log(this.element);
   }
 
   click(e) {
@@ -18,7 +18,9 @@ export default class extends Controller {
         'X-CSRF-Token': csrfToken,
       },
       body: JSON.stringify({ cell: e.target.id }) 
-    });
+    })
+    .then (response => response.text())
+    .then(html => Turbo.renderStreamMessage(html));
   }
 
   reset(e) {

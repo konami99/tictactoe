@@ -4,9 +4,11 @@
 </head>
 <body>
 	<div>
+		<p id="user"><% if cookies[:player_1] %>player_1<% elsif cookies[:player_2] %>player_2<% end %></p>
 		<%= turbo_stream_from @tictactoeboard.channel %>
 		<%= turbo_frame_tag @tictactoeboard do %>
-			<div class="flash-border mb-4">Status: <%= @tictactoeboard&.whose_turn_next %>'s turn</div>
+			<div id="next"><%= @tictactoeboard&.whose_turn_next %></div>
+			<div id="status" class="flash-border mb-4"><% if (cookies[:player_1] && @tictactoeboard&.whose_turn_next == 'player_2') || (cookies[:player_2] && @tictactoeboard&.whose_turn_next == 'player_1') %>Status: waiting for another player<% else %>Status: your turn<% end %></div>
 			<div class="board my-0 mx-auto" data-controller="tictactoe">
 				<div id="cell_1" class="cell <% if @tictactoeboard.cell_1 == 'circle' %>circle<% elsif @tictactoeboard.cell_1 == 'cross' %>cross<% end %>" data-action="click->tictactoe#click"></div>
 				<div id="cell_2" class="cell <% if @tictactoeboard.cell_2 == 'circle' %>circle<% elsif @tictactoeboard.cell_2 == 'cross' %>cross<% end %>" data-action="click->tictactoe#click"></div>
@@ -25,5 +27,23 @@
 		</button>
 		<%= link_to "Join a game", tictactoeboards_join_path, class: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block" %>
 	</div>
+	<script>
+		addEventListener("turbo:before-stream-render", ((event) => {
+			const fallbackToDefaultActions = event.detail.render
+
+			event.detail.render = function (streamElement) {
+				fallbackToDefaultActions(streamElement)
+				const userName = document.getElementById("user");
+				const nextUser = document.getElementById("next");
+				const status = document.getElementById("status");
+
+				if (userName.textContent === nextUser.textContent) {
+					status.textContent = 'Status: your turn'
+				} else {
+					status.textContent = 'Status: waiting for another player'
+				}
+			}
+		}))
+	</script>
 </body>
 </html>

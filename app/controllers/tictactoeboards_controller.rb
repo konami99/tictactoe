@@ -23,6 +23,8 @@ class TictactoeboardsController < ApplicationController
     elsif player == 'player_2'
       @tictactoeboard.update("#{cell}": 'cross', crosses_count: @tictactoeboard.crosses_count + 1)
     end
+
+    @tictactoeboard.broadcast_replace_to(channel)
   end
 
   def reset
