@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # root "articles#index"
   post '/tictactoeboards/click', to: 'tictactoeboards#click'
   post '/tictactoeboards/reset', to: 'tictactoeboards#reset'
+  post '/tictactoeboards/leave', to: 'tictactoeboards#leave'
   get '/tictactoeboards/index', to: 'tictactoeboards#index'
   get '/tictactoeboards/join', to: 'tictactoeboards#join'
   post '/tictactoeboards/join_team', to: 'tictactoeboards#join_team'

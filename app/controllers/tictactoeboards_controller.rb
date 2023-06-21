@@ -41,6 +41,16 @@ class TictactoeboardsController < ApplicationController
 
   end
 
+  def leave
+    cookies.delete(:player_1)
+    cookies.delete(:player_2)
+    channel = cookies['channel']
+    cookies.delete(:channel)
+
+    ActionCable.server.broadcast(channel, turbo_stream.toast('Player 2 has left the game'))
+    render turbo_stream: turbo_stream.reload
+  end
+
   def join_team
     cookies.delete(:player_1)
     cookies.delete(:player_2)
@@ -49,7 +59,7 @@ class TictactoeboardsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to action: :index }
       format.turbo_stream {
-        ActionCable.server.broadcast(params[:channel], turbo_stream.toast('Someone has joined the game!'))
+        ActionCable.server.broadcast(params[:channel], turbo_stream.toast('Player 2 has joined the game'))
         redirect_to action: :index
       }
     end

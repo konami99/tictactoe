@@ -50,3 +50,7 @@
   animation: flash 3s infinite;
   border: 1px solid;
 }
+
+.hidden {
+  display: none;
+}
