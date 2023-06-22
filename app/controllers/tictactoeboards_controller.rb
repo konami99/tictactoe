@@ -46,6 +46,8 @@ class TictactoeboardsController < ApplicationController
     cookies.delete(:player_2)
     channel = cookies['channel']
     cookies.delete(:channel)
+    tictactoeboard = Tictactoeboard.find_by(channel: channel)
+    tictactoeboard.update(player_2: false)
 
     ActionCable.server.broadcast(channel, turbo_stream.toast('Player 2 has left the game'))
     render turbo_stream: turbo_stream.reload
