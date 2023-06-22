@@ -54,7 +54,7 @@ class TictactoeboardsController < ApplicationController
 
     ActionCable.server.broadcast(channel, turbo_stream.toast('Player 2 has left the game'))
     sleep 2
-    render turbo_stream: turbo_stream.reload
+    ActionCable.server.broadcast(channel, turbo_stream.reload)
   end
 
   def join_team
