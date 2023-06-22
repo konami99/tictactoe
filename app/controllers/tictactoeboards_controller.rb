@@ -34,6 +34,9 @@ class TictactoeboardsController < ApplicationController
     cookies.delete(:channel)
 
     tictactoeboard = Tictactoeboard.destroy_by(channel: channel)
+
+    ActionCable.server.broadcast(channel, turbo_stream.toast('Game has been reset'))
+    sleep 2
     ActionCable.server.broadcast(channel, turbo_stream.reload)
   end
 
@@ -50,6 +53,7 @@ class TictactoeboardsController < ApplicationController
     tictactoeboard.update(player_2: false)
 
     ActionCable.server.broadcast(channel, turbo_stream.toast('Player 2 has left the game'))
+    sleep 2
     render turbo_stream: turbo_stream.reload
   end
 
@@ -62,6 +66,7 @@ class TictactoeboardsController < ApplicationController
       format.html { redirect_to action: :index }
       format.turbo_stream {
         ActionCable.server.broadcast(params[:channel], turbo_stream.toast('Player 2 has joined the game'))
+        sleep 2
         redirect_to action: :index
       }
     end

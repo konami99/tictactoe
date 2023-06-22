@@ -59,11 +59,7 @@ export default class extends Controller {
   }
 
   join(e) {
-    console.log('join');
     let modal = document.getElementById("my-modal");
-
-    
-
     modal.style.display = "block";
   }
 }
