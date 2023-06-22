@@ -30,14 +30,14 @@
 				<button data-controller="tictactoe" data-action="tictactoe#reset" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
 					Restart Game
 				</button>
+				<button data-controller="tictactoe" data-action="tictactoe#join" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+					Join a game
+				</button>
 			<% elsif cookies[:player_2] %>
 				<button data-controller="tictactoe" data-action="tictactoe#leave" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
 					Leave Game
 				</button>
 			<% end %>
-			<button data-controller="tictactoe" data-action="tictactoe#join" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-				Join a game
-			</button>
 		</div>
 		<script>
 			addEventListener("turbo:before-stream-render", ((event) => {
