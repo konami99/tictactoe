@@ -31,9 +31,11 @@
 				<button data-controller="tictactoe" data-action="tictactoe#reset" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
 					Restart Game
 				</button>
-				<button data-controller="tictactoe" data-action="tictactoe#join" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-					Join a game
-				</button>
+				<% if !@tictactoeboard&.player_2 %>
+					<button data-controller="tictactoe" data-action="tictactoe#join" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+						Join a game
+					</button>
+				<% end %>
 			<% elsif cookies[:player_2] %>
 				<button data-controller="tictactoe" data-action="tictactoe#leave" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
 					Leave Game

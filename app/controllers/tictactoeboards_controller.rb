@@ -67,6 +67,7 @@ class TictactoeboardsController < ApplicationController
       format.turbo_stream {
         ActionCable.server.broadcast(params[:channel], turbo_stream.toast('Player 2 has joined the game'))
         sleep 2
+        ActionCable.server.broadcast(params[:channel], turbo_stream.reload)
         redirect_to action: :index
       }
     end
